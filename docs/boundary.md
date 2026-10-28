@@ -37,3 +37,8 @@ here instead of being inferred from a diagram.
 - The action log is a separate artifact from the grant. Every action is
   recorded; reading, exporting and streaming the audit log depend on the plan,
   and the per-session audit view is an Enterprise entitlement.
+
+Two companion pages for a review: the grant and audit questions in more
+detail at https://onpremaiguide.com/on-prem-ai-security-and-audit, and the
+machine sizing that goes with this stack at
+https://onpremaiguide.com/on-prem-ai-server-requirements.
