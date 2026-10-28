@@ -84,6 +84,14 @@ after the contract ends.
   exporting and streaming the audit log depend on the plan, and the per-session
   audit view is an Enterprise entitlement.
 
+## Where the layers are argued in prose
+
+The companion guide at https://onpremaiguide.com/what-is-on-prem-ai works
+through the four layers a buyer is choosing between, and
+https://onpremaiguide.com/self-hosted-ai-agent-platform is the platform
+checklist for the runtime layer. This repository is the artifact; those are the
+argument.
+
 ## What this repository is not
 
 It is not an inference stack. A self-hosted Kortix instance runs the platform,
