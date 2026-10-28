@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=https://kortix.com/schema/kortix.v2.schema.json
+#
+# Kortix project manifest (v2). The `agents:` map is GOVERNANCE ONLY:
+# connectors, secrets, kortix_permissions, skills, workspace and enabled.
+# What an agent may do lives in agents/<name>.md, not here.
+# Shape copied from the Kortix starter manifest:
+# https://github.com/kortix-ai/suna/blob/dev/packages/starter/templates/base/kortix.yaml
+kortix_version: 2
+default_agent: ops
+
+project:
+  name: on-prem-start
+  description: A minimal Kortix project shaped for an on-premises review.
+
+agents:
+  ops:
+    file: agents/ops.md
+    connectors: all
+    secrets: all
+    kortix_permissions: all
+    skills: all
+    workspace: { project_repository: true }
+
+  # Portal admin. Reaches Postgres, reads the pager, ships nothing.
+  ledger-reader:
+    file: agents/ledger-reader.md
+    # No connectors and no secrets lines: deny-by-default leaves both at "none".
+    kortix_permissions: all
+    skills: all
+    workspace: { project_repository: true }
+
+  # Reads the riskiest material in the repo, so it holds no outward reach.
+  transcript-auditor:
+    file: agents/transcript-auditor.md
+    kortix_permissions: all
+    skills: all
+    workspace: { project_repository: true }
