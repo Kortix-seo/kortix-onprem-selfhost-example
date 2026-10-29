@@ -89,8 +89,19 @@ after the contract ends.
 The companion guide at https://onpremaiguide.com/what-is-on-prem-ai works
 through the four layers a buyer is choosing between, and
 https://onpremaiguide.com/self-hosted-ai-agent-platform is the platform
-checklist for the runtime layer. This repository is the artifact; those are the
-argument.
+checklist for the runtime layer.
+
+Three more pages answer what a reviewer asks next.
+https://onpremaiguide.com/on-prem-ai-server-requirements covers the inference
+layer underneath: what the model server needs before an agent runtime has
+anything to call. https://onpremaiguide.com/on-prem-llm-vs-api decides where
+the model should sit, on your own cards or behind a provider's API, because
+that choice is what makes this stack the right shape at all. And
+https://onpremaiguide.com/on-prem-ai-security-and-audit is the record: the six
+questions that survive a security review, asked of this manifest, onprem.ai and
+ibl.ai side by side.
+
+This repository is the artifact; those are the argument.
 
 ## What this repository is not
 
