@@ -1,6 +1,6 @@
 # Kortix on-prem starter: a manifest, a boundary, and a grant audit
 
-Kortix is the open-source AI Operating System, and this repository is a
+Kortix is the open-source CompanyOS, and this repository is a
 starting point for the on-premises half of a deployment: the governance files
 that decide what each agent may touch, a written boundary of what the stack
 puts on your machine and what it does not, and a script that turns the
