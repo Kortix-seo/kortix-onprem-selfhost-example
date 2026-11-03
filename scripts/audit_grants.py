@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Print what each agent in a Kortix manifest may touch, and flag the wide ones.
 
-Reads only the `agents:` map of kortix.yaml: that map is governance, and an
-omitted connectors/secrets/kortix_permissions/skills grant resolves to "none"
-(deny-by-default, manifest header). No dependencies.
+Reads only the `agents:` map of kortix.yaml: one block per agent, carrying the
+grants below. An omitted connectors/secrets/kortix_permissions/skills grant
+resolves to "none", as the manifest header says: a grant a block omits is none.
+No dependencies.
 
 Exit codes: 0 clean read, 3 at least one agent holds both connectors and
 secrets (the grants a reviewer should read first), 2 the manifest is unreadable.
@@ -36,7 +37,7 @@ def parse_grants(text: str) -> list[dict[str, str]]:
             agents[-1][key.strip()] = value.split("#")[0].strip()
     for a in agents:
         for g in GRANTS:
-            a.setdefault(g, NONE)      # deny-by-default
+            a.setdefault(g, NONE)      # a grant a block omits is none
     return agents
 
 
