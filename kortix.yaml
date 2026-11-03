@@ -1,37 +1,57 @@
-# yaml-language-server: $schema=https://kortix.com/schema/kortix.v2.schema.json
+# yaml-language-server: $schema=https://kortix.com/schema/kortix.schema.json
 #
-# Kortix project manifest (v2). The `agents:` map is GOVERNANCE ONLY:
-# connectors, secrets, kortix_permissions, skills, workspace and enabled.
-# What an agent may do lives in agents/<name>.md, not here.
-# Shape copied from the Kortix starter manifest:
-# https://github.com/kortix-ai/suna/blob/dev/packages/starter/templates/base/kortix.yaml
-kortix_version: 2
-default_agent: ops
+# on-prem-start: the Kortix project manifest. Each agent's prompt file, grants
+# and workspace live here; the prompt text lives in agents/<name>.md.
+# Reference: https://kortix.com/docs/developers#kortixyaml-reference
+#
+# A grant a block omits is `none`. `permission` defaults to `allow`. The
+# format carries no version number.
 
 project:
   name: on-prem-start
   description: A minimal Kortix project shaped for an on-premises review.
 
+# My Kortix is the built-in agent a person talks to. It starts `ops` when it
+# names no agent.
+builtin_agents:
+  my_kortix: true
+
+default_agent: ops
+
 agents:
+  # The general worker: reaches every connector and every secret.
   ops:
-    file: agents/ops.md
+    description: General worker for repo, data and ops tasks, done end to end in its own sandbox.
+    mode: primary
+    permission: allow
+    prompt_file: agents/ops.md
+    tools: all
+    skills: all
     connectors: all
     secrets: all
     kortix_permissions: all
-    skills: all
     workspace: { project_repository: true }
 
   # Portal admin. Reaches Postgres, reads the pager, ships nothing.
+  # No connectors and no secrets key: both stay at `none`.
   ledger-reader:
-    file: agents/ledger-reader.md
-    # No connectors and no secrets lines: deny-by-default leaves both at "none".
-    kortix_permissions: all
+    description: Portal admin that reads Postgres and the pager, and ships nothing.
+    mode: primary
+    permission: allow
+    prompt_file: agents/ledger-reader.md
+    tools: all
     skills: all
+    kortix_permissions: all
     workspace: { project_repository: true }
 
-  # Reads the riskiest material in the repo, so it holds no outward reach.
+  # Reads the riskiest material in the repo.
+  # No connectors and no secrets key: both stay at `none`.
   transcript-auditor:
-    file: agents/transcript-auditor.md
-    kortix_permissions: all
+    description: Reads session transcripts, the riskiest material in the repo, and reports what it finds.
+    mode: primary
+    permission: allow
+    prompt_file: agents/transcript-auditor.md
+    tools: all
     skills: all
+    kortix_permissions: all
     workspace: { project_repository: true }
