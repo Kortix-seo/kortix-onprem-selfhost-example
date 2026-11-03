@@ -13,15 +13,25 @@ both checked 2026-10-28. It is a starting point, not an official artifact.
 
 ## Why the manifest is the first file to read
 
-A Kortix project splits governance from behavior. The `agents:` map in
-`kortix.yaml` is governance only: `connectors`, `secrets`, `kortix_permissions`,
-`skills`, `workspace` and `enabled`. What an agent does lives in
-`agents/<name>.md`, in that file's frontmatter and body.
+A Kortix project splits its governance from its prompts. The `agents:` map in
+`kortix.yaml` holds one block per agent: the `prompt_file` that points at
+`agents/<name>.md`, the grants the agent holds (`connectors`, `secrets`,
+`kortix_permissions`, `skills`), the `tools` and `permission` it runs with, and
+its `workspace`. A block can also set `enabled: false` to switch the agent off.
 
-The map is deny-by-default. An omitted `connectors`, `secrets`,
+The prompt text lives in `agents/<name>.md`, and the whole file is the prompt:
+plain markdown, no frontmatter, no grants.
+
+The format carries no version number. A replaced key is deprecated, never
+removed: the old key keeps working, and Kortix reads it as the key that
+replaced it.
+
+The grants are deny-by-default. An omitted `connectors`, `secrets`,
 `kortix_permissions` or `skills` line resolves to `none`, so an agent declared
-without a grant reaches nothing. That is why the field that matters to a
-reviewer is not how many tools exist, but which agents carry `all`.
+without a grant reaches nothing. `tools` and `permission` go the other way:
+`tools` is `all` and `permission` is `allow` unless the block says otherwise.
+That is why the field that matters to a reviewer is not how many tools exist,
+but which agents carry `all`.
 
 ## What the audit prints
 
@@ -45,8 +55,8 @@ dependencies: `python3 scripts/audit_grants.py`.
 
 | Path | What it holds |
 |---|---|
-| `kortix.yaml` | the manifest: three agents, one of them the general worker |
-| `agents/` | one markdown file per agent, behavior only |
+| `kortix.yaml` | the manifest: three agents, their grants and workspace, and the default agent |
+| `agents/` | one markdown prompt file per agent, no frontmatter |
 | `docs/boundary.md` | what runs on your machine, what runs off it, and why |
 | `scripts/audit_grants.py` | the grant table and the exit code above |
 | `.env.example` | the values the stack reads, with the docs' names |
