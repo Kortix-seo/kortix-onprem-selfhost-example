@@ -8,7 +8,7 @@ manifest's grants into a table a security reviewer can read.
 
 It is built from Kortix's documented self-host flow
 (https://kortix.com/docs/host) and the shape of the starter manifest
-(https://github.com/kortix-ai/suna/blob/dev/packages/starter/templates/base/kortix.yaml),
+(https://github.com/kortix-ai/CompanyOS/blob/dev/packages/starter/templates/base/kortix.yaml),
 both checked 2026-10-28. It is a starting point, not an official artifact.
 
 ## Why the manifest is the first file to read
