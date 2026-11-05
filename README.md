@@ -109,7 +109,9 @@ the model should sit, on your own cards or behind a provider's API, because
 that choice is what makes this stack the right shape at all. And
 https://onpremaiguide.com/on-prem-ai-security-and-audit is the record: the six
 questions that survive a security review, asked of this manifest, onprem.ai and
-ibl.ai side by side.
+ibl.ai side by side. And https://onpremaiguide.com/on-prem-ai-appliances compares
+the boxes a buyer is quoted, Go.AI's Go1, NVIDIA's DGX, Locai 1, onprem.ai and
+ibl.ai, and shows which layer each one leaves to you.
 
 This repository is the artifact; those are the argument.
 
